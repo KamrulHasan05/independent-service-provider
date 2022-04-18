@@ -1,9 +1,14 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Form, Button } from 'react-bootstrap';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
-import { useSignInWithEmailAndPassword } from 'react-firebase-hooks/auth';
+import { useSendPasswordResetEmail, useSignInWithEmailAndPassword } from 'react-firebase-hooks/auth';
 import auth from './../../../firbase.init';
 import Loading from '../../Shared/Loading/Loading';
+import { FaGoogle } from "react-icons/fa";
+import { useSignInWithGoogle } from 'react-firebase-hooks/auth';
+import { ToastContainer, toast } from 'react-toastify';
+
+import 'react-toastify/dist/ReactToastify.css';
 
 const Login = () => {
     const [
@@ -12,15 +17,35 @@ const Login = () => {
         loading,
         error,
     ] = useSignInWithEmailAndPassword(auth);
+
+    const [signInWithGoogle, googleUser, GoogleLoading, GoogleError] = useSignInWithGoogle(auth);
+
+
+    const [sendPasswordResetEmail, sending, resetError] = useSendPasswordResetEmail(auth);
+
+    const [email, setEmail] = useState('')
+
+    const handleEmail = event => {
+        setEmail(event.target.value)
+    }
+
     const navigate = useNavigate()
     const location = useLocation()
     const from = location?.state?.from?.pathname || '/'
-    if (loading) {
+
+
+    if (loading || GoogleLoading) {
         return <Loading />
     }
+    if (sending) {
+        toast.success('Reset Email Sent')
+    }
     // navigate after login
-    if (user) {
+    if (user || googleUser) {
         navigate(from, { replace: true })
+    }
+    else if (user || googleUser) {
+        navigate('/')
     }
 
     const handleLogin = event => {
@@ -29,7 +54,15 @@ const Login = () => {
         const password = event.target.password.value
         signInWithEmailAndPassword(email, password)
 
+
     }
+    const handleResetPass = () => {
+        if (email) {
+            sendPasswordResetEmail(email)
+        }
+        toast.error('Please Enter your email')
+    }
+
     return (
         <section className='signup py-5'>
             <div className="container">
@@ -41,7 +74,7 @@ const Login = () => {
 
                                 <Form.Group className="mb-3" >
                                     <Form.Label>Email address</Form.Label>
-                                    <Form.Control name='email' type="email" placeholder="Enter email address" required />
+                                    <Form.Control onBlur={handleEmail} name='email' type="email" placeholder="Enter email address" required />
                                 </Form.Group>
 
                                 <Form.Group className="mb-3" >
@@ -54,8 +87,16 @@ const Login = () => {
                                 </Button>
                             </Form>
                             <div className='mt-3'>
+                                <p><Link to="#" onClick={handleResetPass} className='text-primary pe-auto text-decoration-none'>Forgetted Password?</Link> </p>
+                            </div>
+                            <div className='mt-3'>
                                 <p>Are you new here? <Link to="/signup" className='text-primary pe-auto text-decoration-none'>Please Sign up</Link> </p>
                             </div>
+
+                            <div className='text-center mt-5'>
+                                <button className='btn btn-primary w-100' onClick={() => signInWithGoogle()}><FaGoogle className='me-3' /> Log in with Google</button>
+                            </div>
+                            <ToastContainer />
                         </div>
                     </div>
                 </div>
