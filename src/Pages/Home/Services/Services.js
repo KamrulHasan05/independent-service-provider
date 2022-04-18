@@ -1,10 +1,25 @@
 import React from 'react';
+import SingleService from '../SingleService/SingleService';
+import useServices from './../../../hooks/useServices';
 
 const Services = () => {
+    const [services] = useServices()
     return (
-        <div>
-            <h2>This is service page</h2>
-        </div>
+        <section className='services py-5'>
+            <div className="container">
+                <div className="service-title text-center">
+                    <h2 className='text-success'>My Services</h2>
+                </div>
+                <div className="row g-5 pt-4">
+                    {
+                        services.map(service => <SingleService
+                            key={service.id}
+                            service={service}
+                        />)
+                    }
+                </div>
+            </div>
+        </section>
     );
 };
 

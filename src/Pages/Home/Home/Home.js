@@ -1,9 +1,11 @@
 import React from 'react';
 import './Home.css'
+import Services from './../Services/Services';
 
 const Home = () => {
     return (
         <main>
+            {/* Banner section */}
             <section className="banner py-5">
                 <div className="container">
                     <div className="row align-items-center">
@@ -16,6 +18,9 @@ const Home = () => {
                     </div>
                 </div>
             </section>
+
+            {/* Service section */}
+            <Services></Services>
         </main>
     );
 };

@@ -8,6 +8,7 @@ import About from './Pages/About/About';
 import NotFound from './Pages/Shared/NotFound/NotFound';
 import Login from './Pages/User/Login/Login';
 import SignUp from './Pages/User/SignUp/SignUp';
+import Checkout from './Pages/Checkout/Checkout';
 
 function App() {
   return (
@@ -15,6 +16,8 @@ function App() {
       <Header></Header>
       <Routes>
         <Route path='/' element={<Home />}></Route>
+        <Route path='/checkout/:serviceId' element={<Checkout />}></Route>
+        {/* <Route></Route> */}
         <Route path='/blog' element={<Blog />}></Route>
         <Route path='/about' element={<About />}></Route>
         <Route path='/login' element={<Login />}></Route>
