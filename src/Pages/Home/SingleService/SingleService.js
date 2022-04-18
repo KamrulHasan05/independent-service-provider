@@ -22,8 +22,8 @@ const SingleService = ({ service }) => {
                             {description}
                         </Card.Text>
                     </Card.Body>
-                    <Card.Footer className='bg-success'>
-                        <button onClick={handleService} className="w-100 btn btn-success">Buy Now</button>
+                    <Card.Footer className='bg-primary'>
+                        <button onClick={handleService} className="w-100 btn btn-primary">Buy Now</button>
                     </Card.Footer>
                 </Card>
             </CardGroup>

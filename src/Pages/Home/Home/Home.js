@@ -1,8 +1,14 @@
 import React from 'react';
 import './Home.css'
 import Services from './../Services/Services';
+import ContactImage from '../../../images/contact.png'
+import { Button, Form } from 'react-bootstrap';
 
 const Home = () => {
+    const handleForm = (event) => {
+        event.preventDefault()
+    }
+
     return (
         <main>
             {/* Banner section */}
@@ -21,6 +27,45 @@ const Home = () => {
 
             {/* Service section */}
             <Services></Services>
+
+            {/* Contact section */}
+            <section className='contact py-5'>
+                <div className="container">
+                    <div className="service-title text-center">
+                        <h2 className='text-success'>Contact Me</h2>
+                    </div>
+                    <div className="row pt-4 g-5 align-items-center">
+                        <div className="col-md-5 ">
+                            <div className="contact-img shadow-lg rounded-3">
+                                <img src={ContactImage} className='img-fluid' alt="contact img" />
+                            </div>
+                        </div>
+                        <div className="col-md-7">
+                            <div className="contact-content">
+                                <Form onSubmit={handleForm}>
+                                    <Form.Group className="mb-3" controlId="formBasicEmail">
+                                        <Form.Control type="text" placeholder="Enter your name" />
+                                    </Form.Group>
+                                    <Form.Group className="mb-3" controlId="formBasicEmail">
+                                        <Form.Control type="email" placeholder="Enter your email" />
+                                    </Form.Group>
+                                    <Form.Group className="mb-3" controlId="formBasicEmail">
+                                        <textarea className='form-control' rows="5" placeholder='Enter your message'></textarea>
+                                    </Form.Group>
+
+
+                                    <div className='text-center'>
+                                        <Button variant="primary" className='w-50' type="submit">
+                                            Contact Me
+                                        </Button>
+                                    </div>
+
+                                </Form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
         </main>
     );
 };
