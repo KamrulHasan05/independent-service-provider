@@ -29,7 +29,7 @@ const Home = () => {
             <Services></Services>
 
             {/* Contact section */}
-            <section className='contact py-5'>
+            <section className='contact pb-5'>
                 <div className="container">
                     <div className="service-title text-center">
                         <h2 className='text-success'>Contact Me</h2>
@@ -43,19 +43,19 @@ const Home = () => {
                         <div className="col-md-7">
                             <div className="contact-content">
                                 <Form onSubmit={handleForm}>
-                                    <Form.Group className="mb-3" controlId="formBasicEmail">
+                                    <Form.Group className="mb-3">
                                         <Form.Control type="text" placeholder="Enter your name" />
                                     </Form.Group>
-                                    <Form.Group className="mb-3" controlId="formBasicEmail">
+                                    <Form.Group className="mb-3" >
                                         <Form.Control type="email" placeholder="Enter your email" />
                                     </Form.Group>
-                                    <Form.Group className="mb-3" controlId="formBasicEmail">
+                                    <Form.Group className="mb-3">
                                         <textarea className='form-control' rows="5" placeholder='Enter your message'></textarea>
                                     </Form.Group>
 
 
-                                    <div className='text-center'>
-                                        <Button variant="primary" className='w-50' type="submit">
+                                    <div className='text-center mt-4'>
+                                        <Button variant="primary" className='w-25' type="submit">
                                             Contact Me
                                         </Button>
                                     </div>
